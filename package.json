@@ -1,0 +1,27 @@
+{
+  "name": "abstractsyntaxforfunandprofit",
+  "version": "1.0.0",
+  "description": "AST experiments - neither fun nor profitable",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlennox/abstractsyntaxforfunandprofit.git"
+  },
+  "keywords": [
+    "ast",
+    "abstract",
+    "syntax",
+    "tree",
+    "babel",
+    "javascript"
+  ],
+  "author": "Mark Lennox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mlennox/abstractsyntaxforfunandprofit/issues"
+  },
+  "homepage": "https://github.com/mlennox/abstractsyntaxforfunandprofit#readme"
+}
