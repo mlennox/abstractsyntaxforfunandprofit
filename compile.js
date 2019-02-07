@@ -1,12 +1,13 @@
 const fs = require('fs');
 const babel = require('babel-core');
 
-const pluginFile = process.argv[2];
+const pluginName = process.argv[2];
 const sourceFile = process.argv[3];
 
-const plugin = require(pluginFile);
+// by convention the plugin file is the same name as the folder
+const plugin = require(`./${pluginName}/${pluginName}.js`);
 
-fs.readFile(sourceFile, function(error, data) {
+fs.readFile(`./${pluginName}/${sourceFile}`, function(error, data) {
   if (error) throw error;
 
   const source = data.toString();
@@ -17,11 +18,11 @@ fs.readFile(sourceFile, function(error, data) {
 
   console.log(`
   
-Source code (${sourceFile})
+Source code (./${pluginName}/${sourceFile})
 ===============
 ${source}
 
-Compiled code using "${pluginFile}" plugin
+Compiled code using "${pluginName}" plugin
 ==============
 ${compiled.code}
 
