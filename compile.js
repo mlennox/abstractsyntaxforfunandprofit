@@ -4,9 +4,6 @@ const babel = require('babel-core');
 const pluginFile = process.argv[2];
 const sourceFile = process.argv[3];
 
-console.log(`plugin "${pluginFile}"`);
-console.log(`source "${sourceFile}"`);
-
 const plugin = require(pluginFile);
 
 fs.readFile(sourceFile, function(error, data) {
@@ -18,5 +15,15 @@ fs.readFile(sourceFile, function(error, data) {
     plugins: [plugin],
   });
 
-  console.log(compiled.code);
+  console.log(`
+  
+Source code (${sourceFile})
+===============
+${source}
+
+Compiled code using "${pluginFile}" plugin
+==============
+${compiled.code}
+
+`);
 });
