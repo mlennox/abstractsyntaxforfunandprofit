@@ -20,11 +20,12 @@ There are a few examples included
 
 To run each example, use the provided `compile.js` file which loads the source file, the specified plugin and prints the resulting transpiled code to the console.
 
-For example, to run the `varToConst` transform 
+For example, to run the `varToConst` transform use the command below. The convention is that the plugin name will match the folder name, and the compiler will assume the source files are in the same folder.
 
 ```bash
 node compile.js varToConst vars.source.js
 ```
+
 Which will produce the following result
 
 ```text
