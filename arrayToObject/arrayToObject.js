@@ -3,13 +3,47 @@ module.exports = function(babel) {
   return {
     visitor: {
       ArrayExpression(path) {
-        path.node.elements.forEach(element => {
-          console.log(element);
+        const objectProps = [];
+        path.node.elements.forEach((element, index) => {
+          // console.log(element);
+          //key, value, computed, shorthand, decorators
+          // const props = new t.objectProperty(new t.stringLiteral(`${index}`), t.stringLiteral(`${element.value}`));
+          objectProps.push(
+            new t.objectProperty(new t.stringLiteral(`${index}`), new t.stringLiteral(`${element.value}`))
+          );
         });
+
+        const objectLiteralFromArray = new t.objectExpression(objectProps);
+
+        path.replaceWith(objectLiteralFromArray);
       },
     },
   };
 };
+
+// {
+//   "type": "Property",
+//     "start": 98,
+//       "end": 113,
+//         "method": false,
+//           "shorthand": false,
+//             "computed": false,
+//               "key": {
+//     "type": "Literal",
+//       "start": 98,
+//         "end": 101,
+//           "value": "0",
+//             "raw": "\"0\""
+//   },
+//   "value": {
+//     "type": "Literal",
+//       "start": 103,
+//         "end": 113,
+//           "value": "sixpence",
+//             "raw": "\"sixpence\""
+//   },
+//   "kind": "init"
+// },
 
 // Node {
 //   type: 'ArrayExpression',
