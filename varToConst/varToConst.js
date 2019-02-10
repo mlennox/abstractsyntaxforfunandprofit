@@ -1,5 +1,4 @@
-module.exports = function(babel) {
-  const t = babel.types;
+module.exports = function({ types: t }) {
   return {
     visitor: {
       VariableDeclaration(path) {
