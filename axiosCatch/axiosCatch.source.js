@@ -1,16 +1,10 @@
-const doThings = ({ config }) => {
-  return Promise((resolve, reject) => {
-    if (!config.url) {
-      reject('no url');
-    }
-    resolve(`${config.url}/doThings`);
-  });
-}
+import axios from 'axios';
 
-doThings({ config: { url: 'https://breakit.co.uk' } })
-  .then(url => {
-    goGetTheThings(url);
-  })
-  .catch(error => {
-    logit(error);
-  })
+export const exampleCall = () => {
+  return axios
+    .get('https://swapi.co/api/people/')
+    .then(starFolk => {
+      console.log(starFolk);
+      return starFolk;
+    }).catch(thing => { })
+}

@@ -19,6 +19,9 @@ module.exports = {
     "import"
   ],
   "rules": {
+    "no-restricted-syntax": [
+      "error", { "selector": "CallExpression > MemberExpression[property.name='then'] ~ :not([property.name='catch']) ", "message": "Add a catch please!" }
+    ],
     "prettier/prettier": [
       "error",
       {
@@ -54,7 +57,7 @@ module.exports = {
     ],
     "max-lines": [
       "warn",
-      80
+      5
     ],
     "eqeqeq": [
       "error",
