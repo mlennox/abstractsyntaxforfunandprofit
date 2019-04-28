@@ -2,25 +2,36 @@ module.exports = {
   "root": true,
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "impliedStrict": true,
-      "classes": true
+      "classes": true,
+      "jsx": true
     }
   },
   "plugins": [
     "prettier",
-    "import"
+    "import",
+    "jest",
+    "react"
   ],
   "rules": {
     "no-restricted-syntax": [
-      "error", { "selector": "CallExpression > MemberExpression[property.name='then'] ~ :not([property.name='catch']) ", "message": "Add a catch please!" }
+      "error", {
+        "selector": "VariableDeclaration[kind='var']",
+        "message": "All variables must be declared as 'const', do not use 'var'"
+      },
+      "error", {
+        "selector": "CallExpression CallExpression MemberExpression Identifier[name='then']",
+        "message": "please add a catch"
+      }
     ],
     "prettier/prettier": [
       "error",
@@ -64,7 +75,7 @@ module.exports = {
       "smart"
     ],
     "prefer-const": "warn",
-    "no-var": "error"
+    // "no-var": "error"
   },
 
 };
