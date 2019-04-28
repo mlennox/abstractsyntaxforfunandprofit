@@ -29,9 +29,9 @@ module.exports = {
         "message": "All variables must be declared as 'const', do not use 'var'"
       },
       "error", {
-        "selector": "CallExpression CallExpression MemberExpression Identifier[name='then']",
-        "message": "please add a catch"
-      }
+        "selector": "JSXElement[children=''] JSXOpeningElement JSXIdentifier[name='FormattedMessage']",
+        "message": "Please use {text => text} function as child of FormattedMessage to avoid spurious span"
+      },
     ],
     "prettier/prettier": [
       "error",
@@ -68,14 +68,14 @@ module.exports = {
     ],
     "max-lines": [
       "warn",
-      5
+      100
     ],
     "eqeqeq": [
       "error",
       "smart"
     ],
     "prefer-const": "warn",
-    // "no-var": "error"
+    "no-var": "error"
   },
 
 };
