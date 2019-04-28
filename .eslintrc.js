@@ -2,23 +2,37 @@ module.exports = {
   "root": true,
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "impliedStrict": true,
-      "classes": true
+      "classes": true,
+      "jsx": true
     }
   },
   "plugins": [
     "prettier",
-    "import"
+    "import",
+    "jest",
+    "react"
   ],
   "rules": {
+    "no-restricted-syntax": [
+      "error", {
+        "selector": "VariableDeclaration[kind='var']",
+        "message": "All variables must be declared as 'const', do not use 'var'"
+      },
+      "error", {
+        "selector": "JSXElement[children=''] JSXOpeningElement JSXIdentifier[name='FormattedMessage']",
+        "message": "Please use {text => text} function as child of FormattedMessage to avoid spurious span"
+      },
+    ],
     "prettier/prettier": [
       "error",
       {
@@ -54,7 +68,7 @@ module.exports = {
     ],
     "max-lines": [
       "warn",
-      80
+      100
     ],
     "eqeqeq": [
       "error",

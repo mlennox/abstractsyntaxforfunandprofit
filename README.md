@@ -8,7 +8,7 @@ I used node 10.15.1 - you probably should too. All you need then is to `npm inst
 
 # What's happening here
 
-This repo contains demo code for an article on Abstract Syntax Trees : https://www.webpusher.ie
+This repo contains demo code for an article on Abstract Syntax Trees : https://www.webpusher.ie/2019/02/06/ast-series
 
 The code demonstrates examples of manipulating Abstract Syntax Trees (AST) using the `babel` javascript compiler.
 
@@ -17,6 +17,7 @@ The code demonstrates examples of manipulating Abstract Syntax Trees (AST) using
 There are a few examples included
 
 - var to const
+- arrayToObject
 
 To run each example, use the provided `compile.js` file which loads the source file, the specified plugin and prints the resulting transpiled code to the console.
 
@@ -47,3 +48,43 @@ let itemTwo = ['tchotchke', 'stuff', 'yokes'];
 ```
 
 Notice the `var` has been updated to a `const`
+
+## ESlint rules with AST selectors
+
+The example here accompanies an article on [AST Selectors](https://webpusher.ie//2019/04/28/ast-selectors-rule)
+
+### The code sample
+
+The code sample is a contrived React component
+
+```javascript
+import React from 'react';
+import FormattedMessage from 'react-intl';
+
+export const basic = () => {
+  return (
+    <div>
+      <FormattedMessage id={`someMessageId`} />
+      <FormattedMessage id={`someOtherMessageId`}>{text => text}</FormattedMessage>
+      <h1>This is not intl component</h1>
+    </div>
+  );
+};
+```
+
+The example AST selector is intended to highlight any `FormattedMessage` components that do not contain an anonymous function. The anonymous function is intended to avoid the message being wrapped in a `span`.
+
+The AST selector shown below is added to the `no-restricted-syntax` rules in eslint config and should highlight the first `FormattedMessage` as an error by ESlint in your IDE. The second `FormattedMessage` will not be highlighted as an error.
+
+```json
+"no-restricted-syntax": [
+  "error", {
+    "selector": "JSXElement[children=''] JSXOpeningElement JSXIdentifier[name='FormattedMessage']",
+    "message": "Please use {text => text} function as child of FormattedMessage to avoid spurious span"
+  },
+]
+```
+
+The resulting error message displayed in VS Code is shown below.
+
+![](./ASTselectors/FormattedMessage/FormattedMessageErrorMessage.png)
